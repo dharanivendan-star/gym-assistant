@@ -9,7 +9,7 @@ question = st.text_input("Ask Question regarding Gym...")
 
 def gym_trainer(question):
     response = client.chat.completions.create(
-        model="model="llama-3.1-8b-instant",
+        model="llama-3.1-8b-instant",
         messages=[
             {
                 "role": "system",
