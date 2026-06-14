@@ -2,8 +2,7 @@
 import streamlit as st
 from groq import Groq
 
-client = Groq(api_key="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")
-
+client = Groq(api_key=st.secrets["GROQ_API_KEY"])
 st.title("Your Personal Gym Assistant")
 
 question = st.text_input("Ask Question regarding Gym...")
