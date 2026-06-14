@@ -1,18 +1,20 @@
 
-import ollama
 import streamlit as st
+from groq import Groq
+
+client = Groq(api_key="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")
 
 st.title("Your Personal Gym Assistant")
 
 question = st.text_input("Ask Question regarding Gym...")
 
 def gym_trainer(question):
-    response = ollama.chat(
-        model = 'mistral',
+    response = client.chat.completions.create(
+        model="llama3-8b-8192",
         messages=[
             {
-                'role' : 'system',
-                'content' : """ You are a gym trainer. 
+                "role": "system",
+                "content": """You are a gym trainer. 
                 rules:
                     - Be polite and friendly
                     - keep answers short and to the point
@@ -20,12 +22,12 @@ def gym_trainer(question):
                 """
             },
             {
-                'role' : 'user',
-                'content' : question
+                "role": "user",
+                "content": question
             }
         ]
     )
-    return response['message']['content']
+    return response.choices[0].message.content
 
 if st.button("Send"):
     st.write(gym_trainer(question))
